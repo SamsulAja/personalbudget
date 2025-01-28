@@ -1,14 +1,20 @@
 <?php
 
-use yii\bootstrap5\Html;
+use yii\helpers\Html;
 
+/** @var yii\web\View $this */
+/** @var frontend\models\Budget $model */
 
-/* @var $this yii\web\View */
-/* @var $model frontend\models\Budget */
-
+$this->title = 'Create Budget';
+$this->params['breadcrumbs'][] = ['label' => 'Budgets', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="budget-create">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
+
 </div>

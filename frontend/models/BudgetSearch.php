@@ -2,18 +2,17 @@
 
 namespace frontend\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\models\Budget;
 
 /**
- * BudgetSearch represents the model behind the search form about `frontend\models\Budget`.
+ * BudgetSearch represents the model behind the search form of `frontend\models\Budget`.
  */
 class BudgetSearch extends Budget
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -24,7 +23,7 @@ class BudgetSearch extends Budget
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -43,6 +42,8 @@ class BudgetSearch extends Budget
     {
         $query = Budget::find();
 
+        // add conditions that should always apply here
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -55,6 +56,7 @@ class BudgetSearch extends Budget
             return $dataProvider;
         }
 
+        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'Year' => $this->Year,

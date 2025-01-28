@@ -2,16 +2,16 @@
 
 namespace frontend\controllers;
 
-use frontend\models\Budget;
-use frontend\models\BudgetSearch;
+use frontend\models\Transaction;
+use frontend\models\TransactionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BudgetController implements the CRUD actions for Budget model.
+ * TransactionController implements the CRUD actions for Transaction model.
  */
-class BudgetController extends Controller
+class TransactionController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class BudgetController extends Controller
     }
 
     /**
-     * Lists all Budget models.
+     * Lists all Transaction models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new BudgetSearch();
+        $searchModel = new TransactionSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class BudgetController extends Controller
     }
 
     /**
-     * Displays a single Budget model.
+     * Displays a single Transaction model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class BudgetController extends Controller
     }
 
     /**
-     * Creates a new Budget model.
+     * Creates a new Transaction model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Budget();
+        $model = new Transaction();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class BudgetController extends Controller
     }
 
     /**
-     * Updates an existing Budget model.
+     * Updates an existing Transaction model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class BudgetController extends Controller
     }
 
     /**
-     * Deletes an existing Budget model.
+     * Deletes an existing Transaction model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class BudgetController extends Controller
     }
 
     /**
-     * Finds the Budget model based on its primary key value.
+     * Finds the Transaction model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Budget the loaded model
+     * @return Transaction the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Budget::findOne(['id' => $id])) !== null) {
+        if (($model = Transaction::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

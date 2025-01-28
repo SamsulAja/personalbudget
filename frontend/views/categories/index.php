@@ -1,55 +1,44 @@
 <?php
-use yii\helpers\Url;
-use yii\bootstrap5\Html;
-use yii\bootstrap5\Modal;
-use kartik\grid\GridView;
-use cangak\ajaxcrud\CrudAsset; 
-use cangak\ajaxcrud\BulkButtonWidget;
 
-/* @var $this yii\web\View */
-/* @var $searchModel frontend\models\CategoriesSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+use frontend\models\Categories;
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\grid\ActionColumn;
+use yii\grid\GridView;
+
+/** @var yii\web\View $this */
+/** @var frontend\models\CategoriesSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Categories';
 $this->params['breadcrumbs'][] = $this->title;
-
-CrudAsset::register($this);
-
 ?>
 <div class="categories-index">
-    <div id="ajaxCrudDatatable">
-        <?=GridView::widget([
-            'id'=>'crud-datatable',
-            'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
-            'pjax'=>true,
-            'columns' => require(__DIR__.'/_columns.php'),
-            'toolbar'=> [
-                ['content'=>
-                    Html::a('<i class="fas fa fa-sync" aria-hidden="true"></i>', [''],
-                    ['data-pjax'=>1, 'class'=>'btn btn-default', 'title'=>'Reset Grid']).
-                    '{toggleData}'.
-                    '{export}'
-                ],
-            ],          
-            'striped' => true,
-            'condensed' => true,
-            'responsive' => true,          
-            'panel' => [
-                'type' => 'primary', 
-                'heading' => '<i class="fas fa fa-list" aria-hidden="true"></i> List Category',
-                'before'=>'',
-                'after'=>'<div class="clearfix"></div>',
-            ]
-        ])?>
-    </div>
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <!-- <p>
+        <?= Html::a('Create Categories', ['create'], ['class' => 'btn btn-success']) ?>
+    </p> -->
+
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'subcategory',
+            'category',
+            'categorytype',
+            // [
+            //     'class' => ActionColumn::className(),
+            //     'urlCreator' => function ($action, Categories $model, $key, $index, $column) {
+            //         return Url::toRoute([$action, 'id' => $model->id]);
+            //      }
+            // ],
+        ],
+    ]); ?>
+
+
 </div>
-<?php Modal::begin([
-   "options" => [
-    "id"=>"ajaxCrudModal",
-    "tabindex" => false // important for Select2 to work properly
-],
-   "id"=>"ajaxCrudModal",
-    "footer"=>"",// always need it for jquery plugin
-])?>
-<?php Modal::end(); ?>
